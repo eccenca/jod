@@ -1,0 +1,44 @@
+---
+layout: default
+rdf_prefix_path: prefixes.pref
+---
+<div>
+  <h1>{{ page.rdf.iri }}</h1>
+
+Label: {{ page.rdf | rdf_property: 'rdfs:label', 'en' }}
+Comment: {{ page.rdf | rdf_property: 'rdfs:comment', 'en' }}
+
+  <h2>Linked Resources</h1>
+{% assign query = 'SELECT ?sub ?pre WHERE { ?resourceUri ?pre ?sub. FILTER isIRI(?sub) }' %}
+{% assign resultset = page.rdf | sparql_query: query %}
+<ul>
+    {% for result in resultset %}
+    <li>
+        <a title="{{ result.pre }}" href="{{ site.baseurl }}./{{ result.sub.page_url }}">{{ result.sub | rdf_property: 'rdfs:label', 'en'}}</a> via
+        <a  href="{{ site.baseurl }}./{{ result.pre.page_url }}">{{ result.pre }}</a>
+    </li>
+    {% endfor %}
+</ul>
+
+<h2>Resources linking here</h1>
+{% assign query = 'SELECT ?sub ?pre WHERE { ?sub ?pre ?resourceUri }' %}
+{% assign resultset = page.rdf | sparql_query: query %}
+<ul>
+    {% for result in resultset %}
+    <li>
+        <a title="{{ result.pre }}" href="{{ site.baseurl }}./{{ result.sub.page_url }}">{{ result.sub | rdf_property: 'rdfs:label', 'en'}}</a>
+    </li>
+    {% endfor %}
+</ul>
+
+<h2>Resources using this as predicate</h1>
+{% assign query = 'SELECT DISTINCT ?sub WHERE { ?sub ?resourceUri ?obj}' %}
+{% assign resultset = page.rdf | sparql_query: query %}
+<ul>
+    {% for result in resultset %}
+    <li>
+        <a href="{{ site.baseurl }}./{{ result.sub.page_url }}">{{ result.sub | rdf_property: 'rdfs:label', 'en'}}</a>
+    </li>
+    {% endfor %}
+</ul>
+</div>

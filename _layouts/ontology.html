@@ -1,0 +1,23 @@
+---
+layout: default
+rdf_prefix_path: prefixes.pref
+---
+<div>
+  <h1>{{ page.rdf.iri }}</h1>
+
+Label: {{ page.rdf | rdf_property: 'rdfs:label', 'en' }}
+Comment: {{ page.rdf | rdf_property: 'rdfs:comment', 'en' }}
+
+{% assign query = 'SELECT ?sub ?pre WHERE { ?sub ?pre ?resourceUri }' %}
+{% assign resultset = page.rdf | sparql_query: query %}
+<table>
+{% for result in resultset %}
+  <tr>
+    <td>{{ result.sub }}</td>
+    <td>{{ result.pre }}</td>
+  </tr>
+{% endfor %}
+</table>
+
+
+</div>
