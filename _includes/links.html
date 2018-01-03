@@ -1,0 +1,74 @@
+{%- if include.iri -%}
+{%- capture iri -%}<{{include.iri}}>{%- endcapture -%}
+{% comment %} iri:"{{iri | escape }}" {% endcomment %}
+{%- assign linksResource = iri | rdf_get -%}
+
+<h2>Linked Resources</h2>
+{%- capture query -%}
+SELECT ?predicate ?object
+WHERE {
+    <{{linksResource}}> ?predicate ?object .
+    FILTER isIRI(?object)
+}
+{%- endcapture -%}
+{% comment %} <pre>{{ query | escape}}</pre> {% endcomment %}
+{% assign resultset = page.rdf | sparql_query: query %}
+<ul>
+    {% for result in resultset %}
+    <li>
+        <a
+            title="{{ result.predicate }}"
+            href="{{ site.baseurl }}./{{ result.object.page_url }}"
+            >{% include label.html iri = result.object.iri %}</a> via
+        <a
+            href="{{ site.baseurl }}./{{ result.predicate.page_url }}"
+            >{% include label.html iri = result.predicate.iri %}</a>
+    </li>
+    {% endfor %}
+</ul>
+
+<h2>Resources linking here</h2>
+{%- capture query -%}
+SELECT ?subject ?predicate
+WHERE {
+    ?subject ?predicate <{{linksResource}}> .
+    FILTER isIRI(?subject)
+}
+{%- endcapture -%}
+{% comment %} <pre>{{ query | escape}}</pre> {% endcomment %}
+{% assign resultset = page.rdf | sparql_query: query %}
+<ul>
+    {% for result in resultset %}
+    <li>
+        <a
+            title="{{ result.predicate }}"
+            href="{{ site.baseurl }}./{{ result.subject.page_url }}"
+            >{% include label.html iri = result.subject.iri %}</a> via
+        <a
+            href="{{ site.baseurl }}./{{ result.predicate.page_url }}"
+            >{% include label.html iri = result.predicate.iri %}</a>
+    </li>
+    {% endfor %}
+</ul>
+
+<h2>Resources using this as predicate</h2>
+{%- capture query -%}
+SELECT ?subject
+WHERE {
+    ?subject <{{linksResource}}> ?predicate .
+    FILTER isIRI(?subject)
+}
+{%- endcapture -%}
+{% comment %} <pre>{{ query | escape}}</pre> {% endcomment %}
+{% assign resultset = page.rdf | sparql_query: query %}
+<ul>
+    {% for result in resultset %}
+    <li>
+        <a
+            href="{{ site.baseurl }}./{{ result.subject.page_url }}"
+            >{% include label.html iri = result.subject.iri %}</a>
+    </li>
+    {% endfor %}
+</ul>
+</div>
+{%- endif -%}
