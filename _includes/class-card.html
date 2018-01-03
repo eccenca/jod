@@ -1,0 +1,67 @@
+{%- capture iri -%}<{{include.iri}}>{%- endcapture -%}
+{%- assign cardResource = iri | rdf_get -%}
+<div
+    class="card"
+    id="{{ cardResource.iri | md5}}"
+    >
+    <div class="card-header">
+        <h4 class="card-title">{% include label.html iri = cardResource.iri %}</h4>
+        <p><small class="text-muted">{{ cardResource.iri }}</small></p>
+        <nav
+            class="nav nav-tabs card-header-tabs"
+            id="{{ cardResource.iri | md5}}-nav"
+            role="tablist">
+            <a
+                href="#{{ cardResource.iri | md5}}-description"
+                class="nav-item nav-link active"
+                aria-selected="true"
+                data-toggle="tab"
+                role="tab">Description</a>
+            <a
+                href="#{{ cardResource.iri | md5}}-annotations"
+                class="nav-item nav-link"
+                aria-selected="false"
+                data-toggle="tab"
+                role="tab">Annotations</a>
+            <a
+                href="#{{ cardResource.iri | md5}}-relations"
+                id="{{ cardResource.iri | md5}}-tab-relations"
+                class="nav-item nav-link"
+                aria-selected="false"
+                data-toggle="tab"
+                role="tab">Relations</a>
+        </nav>
+    </div>
+    <div
+        id="{{ cardResource.iri | md5}}-tab-content"
+        class="tab-content card-body">
+        <p
+            id="{{ cardResource.iri | md5}}-description"
+            class="card-text tab-pane fade show active"
+            role="tabpanel">
+        {{ cardResource | rdf_property: 'rdfs:comment', 'en'}}
+        </p>
+        <p
+            id="{{ cardResource.iri | md5}}-annotations"
+            class="card-text tab-pane fade"
+            role="tabpanel">
+        ...
+        </p>
+        <p
+            id="{{ cardResource.iri | md5}}-relations"
+            class="card-text tab-pane fade"
+            role="tabpanel">
+        ...
+        </p>
+    </div>
+    <div class="card-footer">
+        {% assign dct_modified = cardResource | rdf_property: 'dct:modified' %}
+        {% if dct_modified %}<small class="text-muted">Modified: {{ dct_modified }}</small>{% endif %}
+
+        {% assign dct_created = cardResource | rdf_property: 'dct:created' %}
+        {% if dct_created %}<small class="text-muted">Created: {{ dct_created }}</small>{% endif %}
+
+        {% assign vs_term_status = cardResource | rdf_property: 'vs:term_status' %}
+        {% if vs_term_status %}<small class="text-muted">Status: {{ vs_term_status }}</small>{% endif %}
+    </div>
+</div>
