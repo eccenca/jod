@@ -1,0 +1,9 @@
+{%- capture iri -%}<{{include.iri}}>{%- endcapture -%}
+{%- assign labelResource = iri | rdf_get -%}
+{%- assign label = labelResource | rdf_property: 'skos:prefLabel', 'en' -%}
+{%- unless label -%}{%- assign label = labelResource | rdf_property: 'skos:prefLabel' -%}{%- endunless -%}
+{%- unless label -%}{%- assign label = labelResource | rdf_property: 'rdfs:label', 'en' -%}{%- endunless -%}
+{%- unless label -%}{%- assign label = labelResource | rdf_property: 'rdfs:label' -%}{%- endunless -%}
+{%- unless label -%}{%- assign label = labelResource.iri | split: "#" -%}{%- assign label = {{label[1]}} -%}{%- endunless -%}
+{%- unless label -%}{%- assign label = labelResource.iri | split: "/" -%}{%- assign label = {{label.last}} -%}{%- endunless -%}
+{{- label -}}
