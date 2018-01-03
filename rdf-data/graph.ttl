@@ -23,6 +23,7 @@ mv:ClassA
     rdfs:comment "A simple OWL Class with some basic annotations."@en ;
     dcterms:modified "2016-02-10"^^xsd:date ;
     rdfs:isDefinedBy <http://schema.mobivoc.org/> ;
+    rdfs:subClassOf mv:ClassB ;
     rdfs:label "Class A"@en ;
 .
 
@@ -41,6 +42,7 @@ mv:ClassWithOutLabel
     a owl:Class ;
     rdfs:comment "class with no labels and only modified"@en ;
     dcterms:modified "2016-02-10"^^xsd:date ;
+    rdfs:subClassOf mv:ClassB ;
     rdfs:isDefinedBy <http://schema.mobivoc.org/> ;
 .
 
@@ -53,7 +55,9 @@ mv:ClassWithOutLabel
 
 mv:date
     a owl:DatatypeProperty ;
+    skos:definition "defined as a string of more than one component ..."@en ;
     rdfs:comment      "the date of ..."@en ;
+    skos:example "2017-12-12"^^xsd:date ;
     rdfs:domain       mv:ClassA ;
     rdfs:isDefinedBy  mv: ;
     rdfs:label        "Datum"@de , "date"@en ;
@@ -61,7 +65,7 @@ mv:date
 mv:entrance
     a owl:ObjectProperty;
     rdfs:comment      "Describes the entrance of a parking facility."@en ;
-    rdfs:domain       mv:ClassA ;
+    rdfs:domain       mv:ClassB ;
     rdfs:isDefinedBy  mv: ;
     rdfs:label        "hat Einfahrt"@de , "entrance"@en ;
     rdfs:range        mv:ClassWithOutLabel

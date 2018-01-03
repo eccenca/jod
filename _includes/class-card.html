@@ -35,33 +35,167 @@
     <div
         id="{{ cardResource.iri | md5}}-tab-content"
         class="tab-content card-body">
-        <p
+        <div
             id="{{ cardResource.iri | md5}}-description"
             class="card-text tab-pane fade show active"
             role="tabpanel">
-        {{ cardResource | rdf_property: 'rdfs:comment', 'en'}}
-        </p>
-        <p
+            <p>
+            {{ cardResource | rdf_property: 'rdfs:comment', 'en'}}
+            </p>
+            <dl>
+                {%- assign literal = cardResource | rdf_property: 'dct:description', 'en' -%}
+                {%- if literal -%}
+                <dt>description</dt>
+                <dd>{{- literal -}}</dd>
+                {%- endif -%}
+
+                {%- assign literal = cardResource | rdf_property: 'skos:scopeNote', 'en' -%}
+                {%- if literal -%}
+                <dt>scope</dt>
+                <dd>{{- literal -}}</dd>
+                {%- endif -%}
+
+                {%- assign literal = cardResource | rdf_property: 'skos:definition', 'en' -%}
+                {%- if literal -%}
+                <dt>definition</dt>
+                <dd>{{- literal -}}</dd>
+                {%- endif -%}
+
+            </dl>
+        </div>
+        <div
             id="{{ cardResource.iri | md5}}-annotations"
             class="card-text tab-pane fade"
             role="tabpanel">
-        ...
-        </p>
-        <p
+            <dl>
+                {%- assign literal = cardResource | rdf_property: 'skos:note', 'en' -%}
+                {%- if literal -%}
+                <dt>has note</dt>
+                <dd>{{- literal -}}</dd>
+                {%- endif -%}
+
+                {%- assign literal = cardResource | rdf_property: 'skos:editorialNote', 'en' -%}
+                {%- if literal -%}
+                <dt>has editorial note</dt>
+                <dd>{{- literal -}}</dd>
+                {%- endif -%}
+
+                {%- assign literal = cardResource | rdf_property: 'skos:changeNote', 'en' -%}
+                {%- if literal -%}
+                <dt>has change note</dt>
+                <dd>{{- literal -}}</dd>
+                {%- endif -%}
+
+                {%- assign literal = cardResource | rdf_property: 'skos:historyNote', 'en' -%}
+                {%- if literal -%}
+                <dt>has history note</dt>
+                <dd>{{- literal -}}</dd>
+                {%- endif -%}
+
+                {%- assign literal = cardResource | rdf_property: 'vs:term_status' -%}
+                {%- if literal -%}
+                <dt>has status</dt>
+                <dd>{{- literal -}}</dd>
+                {%- endif -%}
+
+                {%- assign resultset = cardResource | rdf_property: 'dct:created', nil, true -%}
+                {%- if resultset -%}
+                <dt>was created at</dt>
+                {%- for date in resultset -%}
+                <dd>{{- date -}}</dd>
+                {%- endfor -%}
+                {%- endif -%}
+
+                {%- assign resultset = cardResource | rdf_property: 'dct:modified', nil, true -%}
+                {%- if resultset -%}
+                <dt>was modified at</dt>
+                {%- for date in resultset -%}
+                <dd>{{- date -}}</dd>
+                {%- endfor -%}
+                {%- endif -%}
+
+                {%- assign resultset = cardResource | rdf_property: 'skos:example', nil, true -%}
+                {%- if resultset -%}
+                <dt>example values</dt>
+                {%- for literal in resultset -%}
+                <dd>{{- literal -}}</dd>
+                {%- endfor -%}
+                {%- endif -%}
+            </dl>
+        </div>
+        <div
             id="{{ cardResource.iri | md5}}-relations"
             class="card-text tab-pane fade"
             role="tabpanel">
-        ...
-        </p>
+            <dl>
+                {%- assign resultset = cardResource | rdf_inverse_property: 'rdfs:subClassOf', nil, true -%}
+                {%- if resultset -%}
+                <dt>has sub-classes</dt>
+                {%- for resourceIri in resultset -%}
+                <dd>{%- include internal-link.html iri = resourceIri -%}</dd>
+                {%- endfor -%}
+                {%- endif -%}
+
+                {%- assign resultset = cardResource | rdf_property: 'rdfs:subClassOf', nil, true -%}
+                {%- if resultset -%}
+                <dt>has super-classes</dt>
+                {%- for resourceIri in resultset -%}
+                <dd>{%- include internal-link.html iri = resourceIri -%}</dd>
+                {%- endfor -%}
+                {%- endif -%}
+
+                {%- assign resultset = cardResource | rdf_inverse_property: 'rdfs:domain', nil, true -%}
+                {%- if resultset -%}
+                <dt>is in domain of</dt>
+                {%- for resourceIri in resultset -%}
+                <dd>{%- include internal-link.html iri = resourceIri -%}</dd>
+                {%- endfor -%}
+                {%- endif -%}
+
+                {%- assign resultset = cardResource | rdf_inverse_property: 'rdfs:range', nil, true -%}
+                {%- if resultset -%}
+                <dt>is in range of</dt>
+                {%- for resourceIri in resultset -%}
+                <dd>{%- include internal-link.html iri = resourceIri -%}</dd>
+                {%- endfor -%}
+                {%- endif -%}
+
+                {%- assign resultset = cardResource | rdf_property: 'rdfs:domain', nil, true -%}
+                {%- if resultset -%}
+                <dt>has domain</dt>
+                {%- for resourceIri in resultset -%}
+                <dd>{%- include internal-link.html iri = resourceIri -%}</dd>
+                {%- endfor -%}
+                {%- endif -%}
+
+                {%- assign resultset = cardResource | rdf_property: 'rdfs:range', nil, true -%}
+                {%- if resultset -%}
+                <dt>has range</dt>
+                {%- for resourceIri in resultset -%}
+                <dd>{%- include internal-link.html iri = resourceIri -%}</dd>
+                {%- endfor -%}
+                {%- endif -%}
+
+                {%- assign rdfsIsDefinedBy = cardResource | rdf_property: 'rdfs:isDefinedBy' -%}
+                {%- if rdfsIsDefinedBy -%}
+                <dt>is defined by</dt>
+                <dd>{{- rdfsIsDefinedBy -}}</dd>
+                {%- endif -%}
+            </dl>
+        </div>
     </div>
     <div class="card-footer">
-        {% assign dct_modified = cardResource | rdf_property: 'dct:modified' %}
-        {% if dct_modified %}<small class="text-muted">Modified: {{ dct_modified }}</small>{% endif %}
-
-        {% assign dct_created = cardResource | rdf_property: 'dct:created' %}
-        {% if dct_created %}<small class="text-muted">Created: {{ dct_created }}</small>{% endif %}
-
-        {% assign vs_term_status = cardResource | rdf_property: 'vs:term_status' %}
-        {% if vs_term_status %}<small class="text-muted">Status: {{ vs_term_status }}</small>{% endif %}
+        {%- assign dctModified = cardResource | rdf_property: 'dct:modified' -%}
+        {%- if dctModified -%}
+        <small class="text-muted">Modified: {{- dctModified -}}</small>
+        {%- endif -%}
+        {%- assign dctCreated = cardResource | rdf_property: 'dct:created' -%}
+        {%- if dctCreated -%}
+        <small class="text-muted">Created: {{- dctCreated -}}</small>
+        {% endif -%}
+        {%- assign vsTermStatus = cardResource | rdf_property: 'vs:term_status' -%}
+        {%- if vsTermStatus -%}
+        <small class="text-muted">Status: {{- vsTermStatus -}}</small>
+        {%- endif -%}
     </div>
 </div>

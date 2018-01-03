@@ -2,8 +2,37 @@
   <h1 class="display-3">{% include label.html iri = page.rdf.iri %}</h1>
   <p class="lead">{{ page.rdf | rdf_property: 'rdfs:comment', 'en' }}</p>
   <hr class="my-4">
-  <p>{{ page.rdf.iri }}</p>
-  <p class="lead">
+  <p>
+    <dl>
+        {%- assign owlVersionInfo = page.rdf | rdf_property: 'owl:versionInfo' -%}
+        {%- if owlVersionInfo -%}
+        <dt>Version</dt>
+        <dd>{{- owlVersionInfo -}}</dd>
+        {%- endif -%}
+        {%- assign dctcreated = page.rdf | rdf_property: 'dct:created' -%}
+        {%- if dctcreated -%}
+        <dt>Created</dt>
+        <dd>{{- dctcreated -}}</dd>
+        {%- endif -%}
+        {%- assign dctmodified = page.rdf | rdf_property: 'dct:modified' -%}
+        {%- if dctmodified -%}
+        <dt>Modified</dt>
+        <dd>{{- dctmodified -}}</dd>
+        {%- endif -%}
+        {%- assign vannPreferredNamespacePrefix = page.rdf | rdf_property: 'vann:preferredNamespacePrefix' -%}
+        {%- if vannPreferredNamespacePrefix -%}
+        <dt>Preferred Namespace Prefix</dt>
+        <dd>{{- vannPreferredNamespacePrefix -}}</dd>
+        {%- endif -%}
+        {%- assign vannPreferredNamespaceUri = page.rdf | rdf_property: 'vann:preferredNamespaceUri' -%}
+        {%- if vannPreferredNamespaceUri -%}
+        <dt>Preferred Namespace URI</dt>
+        <dd>{{- vannPreferredNamespaceUri -}}</dd>
+        {%- endif -%}
+    </dl>
+  </p>
+  <hr class="my-4">
+  <p>
   {% for result in countClassResultSet %}
     <a class="btn btn-primary btn-lg" href="#classes" role="button">
         Classes

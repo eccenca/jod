@@ -1,0 +1,7 @@
+{%- capture iri -%}<{{include.iri}}>{%- endcapture -%}
+{%- assign linkedResource = iri | rdf_get -%}
+<a
+    href="#{{ linkedResource.iri | md5 }}"
+    >
+    {%- include label.html iri = linkedResource.iri -%}
+</a>
