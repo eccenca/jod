@@ -2,22 +2,97 @@
 layout: default
 rdf_prefix_path: prefixes.pref
 ---
-<div>
-  <h1>{{ page.rdf.iri }}</h1>
+{% assign classesQuery = '
+    SELECT DISTINCT ?subject
+    WHERE 
+    {
+        ?subject a ?class .
+        FILTER ( ?class IN (owl:Class, rdfs:Class) )
+        FILTER isIRI(?subject)
+    }
+    ORDER BY ?label' %}
+{% assign classesResultset = page.rdf | sparql_query: classesQuery %}
 
-Label: {{ page.rdf | rdf_property: 'rdfs:label', 'en' }}
-Comment: {{ page.rdf | rdf_property: 'rdfs:comment', 'en' }}
+{% assign countClassQuery = '
+    SELECT DISTINCT (COUNT(?subject) as ?classes)
+    WHERE 
+    {
+        ?subject a ?class .
+        FILTER ( ?class IN (owl:Class, rdfs:Class) )
+        FILTER isIRI(?subject)
+    }
+    ' %}
+{% assign countClassResultSet = page.rdf | sparql_query: countClassQuery %}
 
-{% assign query = 'SELECT ?sub ?pre WHERE { ?sub ?pre ?resourceUri }' %}
-{% assign resultset = page.rdf | sparql_query: query %}
-<table>
-{% for result in resultset %}
-  <tr>
-    <td>{{ result.sub }}</td>
-    <td>{{ result.pre }}</td>
-  </tr>
-{% endfor %}
-</table>
+{% assign objectPropertiesQuery = '
+    SELECT DISTINCT ?subject
+    WHERE 
+    {
+        ?subject a ?class .
+        FILTER ( ?class IN (owl:ObjectProperty) )
+        FILTER isIRI(?subject)
+    }
+    ORDER BY ?label' %}
+{% assign objectPropertiesResultset = page.rdf | sparql_query: objectPropertiesQuery %}
 
+{% assign countObjectPropertiesQuery = '
+    SELECT DISTINCT (COUNT(?subject) as ?objectProperties)
+    WHERE 
+    {
+        ?subject a ?class .
+        FILTER ( ?class IN (owl:ObjectProperty) )
+        FILTER isIRI(?subject)
+    }
+    ' %}
+{% assign countObjectPropertiesResultSet = page.rdf | sparql_query: countObjectPropertiesQuery %}
 
+{% assign datatypePropertiesQuery = '
+    SELECT DISTINCT ?subject
+    WHERE 
+    {
+        ?subject a ?class .
+        FILTER ( ?class IN (owl:DatatypeProperty) )
+        FILTER isIRI(?subject)
+    }
+    ORDER BY ?label' %}
+{% assign datatypePropertiesResultset = page.rdf | sparql_query: datatypePropertiesQuery %}
+
+{% assign countDatatypePropertiesQuery = '
+    SELECT DISTINCT (COUNT(?subject) as ?datatypeProperties)
+    WHERE 
+    {
+        ?subject a ?class .
+        FILTER ( ?class IN (owl:DatatypeProperty) )
+        FILTER isIRI(?subject)
+    }
+    ' %}
+{% assign countDatatypePropertiesResultSet = page.rdf | sparql_query: countDatatypePropertiesQuery %}
+
+<div class="container-fluid">
+  <div class="row">
+      {% include navigation.html iri = result.subject.iri %}
+
+      <main role="main" class="container">
+      {% include ontology-head.html iri = result.subject.iri %}
+
+      <h2 id="classes">Overview</h2>
+      <h2 id="classes">Classes</h2>
+      {% for result in classesResultset %}
+          <p>{% include class-card.html iri = result.subject.iri %}</p>
+      {% endfor %}
+
+      <h2 id="objectProperties">Object Properties</h2>
+      {% for result in objectPropertiesResultset %}
+          <p>{% include class-card.html iri = result.subject.iri %}</p>
+      {% endfor %}
+
+      <h2 id="datatypeProperties">Datatype Properties</h2>
+      {% for result in datatypePropertiesResultset %}
+          <p>{% include class-card.html iri = result.subject.iri %}</p>
+      {% endfor %}
+
+      </main>
+
+      {% comment %} {% include links.html iri = page.rdf.iri %} {% endcomment %}
+  </div>
 </div>

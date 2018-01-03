@@ -1,44 +1,22 @@
----
-layout: default
-rdf_prefix_path: prefixes.pref
----
-<div>
-  <h1>{{ page.rdf.iri }}</h1>
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Hello, world!</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-Label: {{ page.rdf | rdf_property: 'rdfs:label', 'en' }}
-Comment: {{ page.rdf | rdf_property: 'rdfs:comment', 'en' }}
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+  </head>
+  <body>
 
-  <h2>Linked Resources</h1>
-{% assign query = 'SELECT ?sub ?pre WHERE { ?resourceUri ?pre ?sub. FILTER isIRI(?sub) }' %}
-{% assign resultset = page.rdf | sparql_query: query %}
-<ul>
-    {% for result in resultset %}
-    <li>
-        <a title="{{ result.pre }}" href="{{ site.baseurl }}./{{ result.sub.page_url }}">{{ result.sub | rdf_property: 'rdfs:label', 'en'}}</a> via
-        <a  href="{{ site.baseurl }}./{{ result.pre.page_url }}">{{ result.pre }}</a>
-    </li>
-    {% endfor %}
-</ul>
+      {{content}}
 
-<h2>Resources linking here</h1>
-{% assign query = 'SELECT ?sub ?pre WHERE { ?sub ?pre ?resourceUri }' %}
-{% assign resultset = page.rdf | sparql_query: query %}
-<ul>
-    {% for result in resultset %}
-    <li>
-        <a title="{{ result.pre }}" href="{{ site.baseurl }}./{{ result.sub.page_url }}">{{ result.sub | rdf_property: 'rdfs:label', 'en'}}</a>
-    </li>
-    {% endfor %}
-</ul>
-
-<h2>Resources using this as predicate</h1>
-{% assign query = 'SELECT DISTINCT ?sub WHERE { ?sub ?resourceUri ?obj}' %}
-{% assign resultset = page.rdf | sparql_query: query %}
-<ul>
-    {% for result in resultset %}
-    <li>
-        <a href="{{ site.baseurl }}./{{ result.sub.page_url }}">{{ result.sub | rdf_property: 'rdfs:label', 'en'}}</a>
-    </li>
-    {% endfor %}
-</ul>
-</div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+  </body>
+</html>

@@ -1,0 +1,24 @@
+<nav class="col-sm-3 col-md-2 d-none d-sm-block bg-light sidebar">
+    <form class="bd-search d-flex align-items-center">
+        <input
+          type="search"
+          class="form-control ds-input"
+          id="search-input"
+          placeholder="Search..."
+          autocomplete="off"
+          spellcheck="false"
+          role="combobox"
+          dir="auto"
+          />
+    </form>
+
+    <ul class="nav nav-pills flex-column">
+        {% for result in classesResultset %}
+            <li class="nav-item">
+                <a class="nav-link" href="#{{ result.subject.iri | md5 }}">
+                    {% include label.html iri = result.subject.iri %}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+</nav>

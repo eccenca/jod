@@ -24,7 +24,7 @@ url: "http://schema.mobivoc.org" # the base hostname & protocol for your site, e
 
 # Build settings
 markdown: kramdown
-theme: minima
+# theme: jekyll-theme-bootstrap
 plugins:
   - jekyll-feed
   - jekyll-rdf
@@ -32,7 +32,11 @@ plugins:
 jekyll_rdf:
     path: "rdf-data/graph.ttl"
     include_blank: false
-    default_template: "default.html"
+    default_template: "resource.html"
+    class_template_mappings:
+      "http://www.w3.org/2002/07/owl#Ontology": "ontology.html"
+    instance_template_mappings:
+        "http://aksw.org/Team": "team.html"
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
