@@ -1,0 +1,26 @@
+<div class="jumbotron">
+  <h1 class="display-3">{% include label.html iri = page.rdf.iri %}</h1>
+  <p class="lead">{{ page.rdf | rdf_property: 'rdfs:comment', 'en' }}</p>
+  <hr class="my-4">
+  <p>{{ page.rdf.iri }}</p>
+  <p class="lead">
+  {% for result in countClassResultSet %}
+    <a class="btn btn-primary btn-lg" href="#classes" role="button">
+        Classes
+        <span class="badge badge-light">{{ result.classes}}</span>
+    </a>
+  {% endfor %}
+  {% for result in countObjectPropertiesResultSet %}
+    <a class="btn btn-primary btn-lg" href="#objectProperties" role="button">
+        Object Properties
+        <span class="badge badge-light">{{ result.objectProperties}}</span>
+    </a>
+  {% endfor %}
+  {%- for result in countDatatypePropertiesResultSet -%}
+    <a class="btn btn-primary btn-lg" href="#datatypeProperties" role="button">
+        Datatype Properties
+        <span class="badge badge-light">{{ result.datatypeProperties }}</span>
+    </a>
+  {%- endfor -%}
+  </p>
+</div>
