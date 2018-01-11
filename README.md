@@ -42,4 +42,5 @@ classMapped: http://www.w3.org/2002/07/owl#Ontology : http://schema.mobivoc.org/
 - [LODE](https://github.com/essepuntato/LODE), Live OWL Documentation Environment to convert OWL ontologies into HTML human-readable pages
 - [specgen](https://github.com/zazi/specgen) and other tools from the [Generating HTML documentation of OWL](https://www.w3.org/2011/prov/wiki/Generating_HTML_documentation_of_OWL) page
 - [OntoWiki's](http://ontowiki.net/) [site extension](https://github.com/AKSW/site.ontowiki), a HTML Content Publishing system on top of Linked Data
+- [Ontodocs](https://github.com/lambdamusic/Ontodocs), a Python command line application aimed at facilitating the creation of documentation for ontologies encoded in RDF/OWL.
 
