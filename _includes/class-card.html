@@ -128,7 +128,7 @@
             class="card-text tab-pane fade"
             role="tabpanel">
             <dl>
-                {%- assign resultset = cardResource | rdf_inverse_property: 'rdfs:subClassOf', nil, true -%}
+                {%- assign resultset = cardResource | rdf_inverse_property: 'rdfs:subClassOf', true -%}
                 {%- if resultset -%}
                 <dt>has sub-classes</dt>
                 {%- for resourceIri in resultset -%}
@@ -144,7 +144,7 @@
                 {%- endfor -%}
                 {%- endif -%}
 
-                {%- assign resultset = cardResource | rdf_inverse_property: 'rdfs:domain', nil, true -%}
+                {%- assign resultset = cardResource | rdf_inverse_property: 'rdfs:domain', true -%}
                 {%- if resultset -%}
                 <dt>is in domain of</dt>
                 {%- for resourceIri in resultset -%}
@@ -152,7 +152,7 @@
                 {%- endfor -%}
                 {%- endif -%}
 
-                {%- assign resultset = cardResource | rdf_inverse_property: 'rdfs:range', nil, true -%}
+                {%- assign resultset = cardResource | rdf_inverse_property: 'rdfs:range', true -%}
                 {%- if resultset -%}
                 <dt>is in range of</dt>
                 {%- for resourceIri in resultset -%}
