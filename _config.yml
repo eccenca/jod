@@ -30,7 +30,7 @@ plugins:
   - jekyll-rdf
 
 jekyll_rdf:
-    path: "rdf-data/graph.ttl"
+    path: "_data/graph.ttl"
     include_blank: false
     default_template: "resource.html"
     class_template_mappings:

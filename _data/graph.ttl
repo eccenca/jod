@@ -70,4 +70,3 @@ mv:entrance
     rdfs:label        "hat Einfahrt"@de , "entrance"@en ;
     rdfs:range        mv:ClassWithOutLabel
 .
-
