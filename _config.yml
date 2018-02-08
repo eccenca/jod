@@ -33,6 +33,7 @@ jekyll_rdf:
     path: "rdf-data/graph.ttl"
     include_blank: false
     default_template: "resource.html"
+    restriction: "SELECT ?resourceUri WHERE { ?resourceUri ?p ?o . FILTER regex(str(?resourceUri), \"http://schema.mobivoc.org/\") }"
     class_template_mappings:
       "http://www.w3.org/2002/07/owl#Ontology": "ontology.html"
     instance_template_mappings:
