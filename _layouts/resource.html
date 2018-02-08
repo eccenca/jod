@@ -4,4 +4,16 @@ rdf_prefix_path: prefixes.pref
 ---
 resource
 
+{% comment %} if page.rdf.covered {% endcomment %}
+{%- capture iri -%}<{{page.rdf.iri}}>{%- endcapture -%}
+{%- assign linksResource = iri | rdf_get -%}
+linksResource: {{linksResource}}
+{% if linksResource %}
+<h2>Linked Resources for {{ page.rdf.iri }}</h2>
 {% include links.html iri = page.rdf.iri %}
+{% endif %}
+
+{% for ancor in page.sub_rdf %}
+<h2>Linked Resources for {{ ancor }}</h2>
+{% include links.html iri = ancor %}
+{% endfor %}

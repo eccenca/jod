@@ -3,7 +3,7 @@
 {% comment %} iri:"{{iri | escape }}" {% endcomment %}
 {%- assign linksResource = iri | rdf_get -%}
 
-<h2>Linked Resources</h2>
+<h3>Linked Resources</h3>
 {%- capture query -%}
 SELECT ?predicate ?object
 WHERE {
@@ -27,7 +27,7 @@ WHERE {
     {% endfor %}
 </ul>
 
-<h2>Resources linking here</h2>
+<h3>Resources linking here</h3>
 {%- capture query -%}
 SELECT ?subject ?predicate
 WHERE {
@@ -51,7 +51,7 @@ WHERE {
     {% endfor %}
 </ul>
 
-<h2>Resources using this as predicate</h2>
+<h3>Resources using this as predicate</h3>
 {%- capture query -%}
 SELECT ?subject
 WHERE {
