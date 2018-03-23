@@ -2,9 +2,9 @@
 
 Gem::Specification.new do |spec|
   spec.name          = "jekyll-theme-jod"
-  spec.version       = "0.1.3"
-  spec.authors       = [""]
-  spec.email         = [""]
+  spec.version       = "0.1.4"
+  spec.authors       = ["Sebastian Tramp"]
+  spec.email         = ["sebastian.tramp@eccenca.com"]
 
   spec.summary       = %q{The JOD theme generates documentation web pages from Ontology turtle documents using Jekyll-RDF extension.}
   spec.homepage      = "https://github.com/eccenca/jod"
