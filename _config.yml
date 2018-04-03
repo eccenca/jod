@@ -30,7 +30,7 @@ plugins:
   - jekyll-rdf
 
 jekyll_rdf:
-    path: "rdf-data/graph.ttl"
+    path: "_data/graph.ttl"
     include_blank: false
     default_template: "resource.html"
     restriction: "SELECT ?resourceUri WHERE { ?resourceUri ?p ?o . FILTER regex(str(?resourceUri), \"http://schema.mobivoc.org/\") }"
