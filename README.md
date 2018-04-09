@@ -49,10 +49,7 @@ When your theme is released, only the files in `_layouts`, `_includes`, and `_sa
 
 ## License
 
-See https://github.com/eccenca/jod/issues/6
-
-Maybe it will be: "The theme is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT)."
-
+The theme is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT). Take a look at the `LICENSE` file.
 
 ## Screenshot
 
