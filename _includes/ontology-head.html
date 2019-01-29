@@ -1,5 +1,6 @@
 <div class="jumbotron">
   <h1 class="display-3">{% include label.html iri = page.rdf.iri %}</h1>
+  <p class="lead subtitle">{{ page.rdf | rdf_property: 'dbo:subtitle', 'en' }}</p>
   <p class="lead">{{ page.rdf | rdf_property: 'rdfs:comment', 'en' }}</p>
   <hr class="my-4">
   <p>
