@@ -20,6 +20,24 @@
         <dt>Modified</dt>
         <dd>{{- dctmodified -}}</dd>
         {%- endif -%}
+        {%- assign dctcreators = page.rdf | rdf_property: 'dct:creator', nil, true -%}
+        {%- if dctcreators.first -%}
+        {%- if dctcreators.size > 1 -%}
+        <dt>Creators</dt>
+        {%- else -%}
+        <dt>Creator</dt>
+        {%- endif -%}
+        <dd>
+        {%- for dctcreator in dctcreators -%}
+        {%- if dctcreator.iri -%}
+        <a href="{{- dctcreator.iri -}}">{%- include label.html iri = dctcreator.iri -%}</a>
+        {%- else -%}
+        {{- dctcreator -}}
+        {%- endif -%}
+        {%- unless forloop.last -%}, {% endunless -%}
+        {%- endfor -%}
+        </dd>
+        {%- endif -%}
         {%- assign vannPreferredNamespacePrefix = page.rdf | rdf_property: 'vann:preferredNamespacePrefix' -%}
         {%- if vannPreferredNamespacePrefix -%}
         <dt>Preferred Namespace Prefix</dt>
