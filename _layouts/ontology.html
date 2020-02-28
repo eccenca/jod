@@ -1,10 +1,10 @@
 ---
 layout: default
-rdf_prefix_path: _data/prefixes.pref
+rdf_prefix_path: "_data/prefixes.pref"
 ---
 {% assign classesQuery = '
     SELECT DISTINCT ?subject
-    WHERE 
+    WHERE
     {
         ?subject a ?class .
         FILTER ( ?class IN (owl:Class, rdfs:Class) )
@@ -15,7 +15,7 @@ rdf_prefix_path: _data/prefixes.pref
 
 {% assign countClassQuery = '
     SELECT DISTINCT (COUNT(?subject) as ?classes)
-    WHERE 
+    WHERE
     {
         ?subject a ?class .
         FILTER ( ?class IN (owl:Class, rdfs:Class) )
@@ -26,7 +26,7 @@ rdf_prefix_path: _data/prefixes.pref
 
 {% assign objectPropertiesQuery = '
     SELECT DISTINCT ?subject
-    WHERE 
+    WHERE
     {
         ?subject a ?class .
         FILTER ( ?class IN (owl:ObjectProperty) )
@@ -37,7 +37,7 @@ rdf_prefix_path: _data/prefixes.pref
 
 {% assign countObjectPropertiesQuery = '
     SELECT DISTINCT (COUNT(?subject) as ?objectProperties)
-    WHERE 
+    WHERE
     {
         ?subject a ?class .
         FILTER ( ?class IN (owl:ObjectProperty) )
@@ -48,7 +48,7 @@ rdf_prefix_path: _data/prefixes.pref
 
 {% assign datatypePropertiesQuery = '
     SELECT DISTINCT ?subject
-    WHERE 
+    WHERE
     {
         ?subject a ?class .
         FILTER ( ?class IN (owl:DatatypeProperty) )
@@ -59,7 +59,7 @@ rdf_prefix_path: _data/prefixes.pref
 
 {% assign countDatatypePropertiesQuery = '
     SELECT DISTINCT (COUNT(?subject) as ?datatypeProperties)
-    WHERE 
+    WHERE
     {
         ?subject a ?class .
         FILTER ( ?class IN (owl:DatatypeProperty) )

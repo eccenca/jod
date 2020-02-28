@@ -24,10 +24,7 @@ url: "http://schema.mobivoc.org" # the base hostname & protocol for your site, e
 
 # Build settings
 markdown: kramdown
-# theme: jekyll-theme-bootstrap
-plugins:
-  - jekyll-feed
-  - jekyll-rdf
+theme: jekyll-theme-jod
 
 jekyll_rdf:
     path: "_data/graph.ttl"

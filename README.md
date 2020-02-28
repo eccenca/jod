@@ -8,29 +8,48 @@ JOD is based on [jekyll](jekyllrb.com) as well as the wonderful [jekyll-rdf plug
 
 In development as a proof of concept project at [eccenca](https://www.eccenca.com).
 
+
+## Installation
+
+Add this line to your Jekyll site's `Gemfile`:
+
+```ruby
+gem "jekyll-theme-jod"
+```
+
+And add this line to your Jekyll site's `_config.yml`:
+
+```yaml
+theme: jekyll-theme-jod
+```
+
+And then execute:
+
+    $ bundle
+
+Or install it yourself as:
+
+    $ gem install jekyll-theme-jod
+
 ## Usage
 
-Currently, you need to clone and tune this repo in order to produce something useful.
-This creates files und `_site` based on the turtle document `graph.ttl` in the `rdf-data` directory:
+TODO: Write usage instructions here. Describe your available layouts, includes, and/or sass.
 
-```
-> git clone https://github.com/eccenca/jod.git; cd jod
-...
-> bundle install
-...
-> JEKYLL_ENV=production bundle exec jekyll serve --watch
-Configuration file: /home/jod/_config.yml
-            Source: /home/jod
-       Destination: /home/jod/_site
- Incremental build: disabled. Enable with --incremental
-      Generating...
-Configuration file: /home/jod/_config.yml
-classMapped: http://www.w3.org/2002/07/owl#Ontology : http://schema.mobivoc.org/ : ontology.html
-                    done in 1.898 seconds.
- Auto-regeneration: enabled for '/home/jod'
-    Server address: http://127.0.0.1:4000//
-  Server running... press ctrl-c to stop.
-```
+## Contributing
+
+Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/hello. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+
+## Development
+
+To set up your environment to develop this theme, run `bundle install`.
+
+Your theme is setup just like a normal Jekyll site! To test your theme, run `bundle exec jekyll serve` and open your browser at `http://localhost:4000`. This starts a Jekyll server using your theme. Add pages, documents, data, etc. like normal to test your theme's contents. As you make modifications to your theme and to your content, your site will regenerate and you should see the changes in the browser after a refresh, just like normal.
+
+When your theme is released, only the files in `_layouts`, `_includes`, and `_sass` tracked with Git will be released.
+
+## License
+
+The theme is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT). Take a look at the `LICENSE` file.
 
 ## Screenshot
 
@@ -43,4 +62,3 @@ classMapped: http://www.w3.org/2002/07/owl#Ontology : http://schema.mobivoc.org/
 - [specgen](https://github.com/zazi/specgen) and other tools from the [Generating HTML documentation of OWL](https://www.w3.org/2011/prov/wiki/Generating_HTML_documentation_of_OWL) page
 - [OntoWiki's](http://ontowiki.net/) [site extension](https://github.com/AKSW/site.ontowiki), a HTML Content Publishing system on top of Linked Data
 - [Ontodocs](https://github.com/lambdamusic/Ontodocs), a Python command line application aimed at facilitating the creation of documentation for ontologies encoded in RDF/OWL.
-
