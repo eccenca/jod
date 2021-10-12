@@ -1,42 +1,43 @@
 {%- capture iri -%}<{{include.iri}}>{%- endcapture -%}
 {%- assign cardResource = iri | rdf_get -%}
+{%- assign resource_md5 = cardResource.iri | md5 -%}
 <div
     class="card"
-    id="{{ cardResource.iri | md5}}"
+    id="id-{{ resource_md5 }}"
     >
     <div class="card-header">
         <h4 class="card-title">{% include label.html iri = cardResource.iri %}</h4>
         <p><small class="text-muted">{{ cardResource.iri }}</small></p>
         <nav
             class="nav nav-tabs card-header-tabs"
-            id="{{ cardResource.iri | md5}}-nav"
+            id="id-{{ resource_md5 }}-nav"
             role="tablist">
             <a
-                href="#{{ cardResource.iri | md5}}-description"
+                href="#id-{{ resource_md5 }}-description"
                 class="nav-item nav-link active"
                 aria-selected="true"
-                data-toggle="tab"
+                data-bs-toggle="tab"
                 role="tab">Description</a>
             <a
-                href="#{{ cardResource.iri | md5}}-annotations"
+                href="#id-{{ resource_md5 }}-annotations"
                 class="nav-item nav-link"
                 aria-selected="false"
-                data-toggle="tab"
+                data-bs-toggle="tab"
                 role="tab">Annotations</a>
             <a
-                href="#{{ cardResource.iri | md5}}-relations"
-                id="{{ cardResource.iri | md5}}-tab-relations"
+                href="#id-{{ resource_md5 }}-relations"
+                id="id-{{ resource_md5 }}-tab-relations"
                 class="nav-item nav-link"
                 aria-selected="false"
-                data-toggle="tab"
+                data-bs-toggle="tab"
                 role="tab">Relations</a>
         </nav>
     </div>
     <div
-        id="{{ cardResource.iri | md5}}-tab-content"
+        id="id-{{ resource_md5 }}-tab-content"
         class="tab-content card-body">
         <div
-            id="{{ cardResource.iri | md5}}-description"
+            id="id-{{ resource_md5 }}-description"
             class="card-text tab-pane fade show active"
             role="tabpanel">
             <p>
@@ -64,7 +65,7 @@
             </dl>
         </div>
         <div
-            id="{{ cardResource.iri | md5}}-annotations"
+            id="id-{{ resource_md5 }}-annotations"
             class="card-text tab-pane fade"
             role="tabpanel">
             <dl>
@@ -124,7 +125,7 @@
             </dl>
         </div>
         <div
-            id="{{ cardResource.iri | md5}}-relations"
+            id="id-{{ resource_md5 }}-relations"
             class="card-text tab-pane fade"
             role="tabpanel">
             <dl>
