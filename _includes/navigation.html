@@ -26,6 +26,20 @@ style="position: -webkit-sticky;
                 </a>
             </li>
         {% endfor %}
+        {% for result in objectPropertiesResultset %}
+            <li class="nav-item">
+                <a class="nav-link" href="#id-{{ result.subject.iri | md5 }}">
+                    {% include label.html iri = result.subject.iri %}
+                </a>
+            </li>
+        {% endfor %}
+        {% for result in datatypePropertiesResultset %}
+            <li class="nav-item">
+                <a class="nav-link" href="#id-{{ result.subject.iri | md5 }}">
+                    {% include label.html iri = result.subject.iri %}
+                </a>
+            </li>
+        {% endfor %}
     </ul>
     <script type="text/javascript">
     function searchInList() {
