@@ -58,6 +58,12 @@
         <span class="badge badge-light">{{ result.classes}}</span>
     </a>
   {% endfor %}
+  {% for result in countRdfPropertiesResultSet %}
+    <a class="btn btn-primary btn-lg" href="#rdfProperties" role="button">
+        RDF Properties
+        <span class="badge badge-light">{{ result.rdfProperties}}</span>
+    </a>
+  {% endfor %}
   {% for result in countObjectPropertiesResultSet %}
     <a class="btn btn-primary btn-lg" href="#objectProperties" role="button">
         Object Properties

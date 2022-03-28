@@ -24,6 +24,32 @@ rdf_prefix_path: "_data/prefixes.pref"
     ' %}
 {% assign countClassResultSet = page.rdf | sparql_query: countClassQuery %}
 
+{% assign rdfPropertiesQuery = '
+    SELECT DISTINCT ?subject
+    WHERE
+    {
+        ?subject a ?class .
+        FILTER ( ?class IN (rdf:Property) )
+        FILTER NOT EXISTS { ?subject a ?owlPropertyClass .
+        FILTER ( ?owlPropertyClass IN ( owl:ObjectProperty , owl:DatatypeProperty ) )}
+        FILTER isIRI(?subject)
+    }
+    ORDER BY ?label' %}
+{% assign rdfPropertiesResultset = page.rdf | sparql_query: rdfPropertiesQuery %}
+
+{% assign countRdfPropertiesQuery = '
+    SELECT DISTINCT (COUNT(?subject) as ?rdfProperties)
+    WHERE
+    {
+        ?subject a ?class .
+        FILTER ( ?class IN (rdf:Property) )
+        FILTER NOT EXISTS { ?subject a ?owlPropertyClass .
+        FILTER ( ?owlPropertyClass IN ( owl:ObjectProperty , owl:DatatypeProperty ) )}
+        FILTER isIRI(?subject)
+    }
+    ' %}
+{% assign countRdfPropertiesResultSet = page.rdf | sparql_query: countRdfPropertiesQuery %}
+
 {% assign objectPropertiesQuery = '
     SELECT DISTINCT ?subject
     WHERE
@@ -78,6 +104,11 @@ rdf_prefix_path: "_data/prefixes.pref"
       <h2 id="classes">Overview</h2>
       <h2 id="classes">Classes</h2>
       {% for result in classesResultset %}
+          <p>{% include class-card.html iri = result.subject.iri %}</p>
+      {% endfor %}
+
+      <h2 id="rdfProperties">RDF Properties</h2>
+      {% for result in rdfPropertiesResultset %}
           <p>{% include class-card.html iri = result.subject.iri %}</p>
       {% endfor %}
 
