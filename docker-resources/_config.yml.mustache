@@ -1,0 +1,12 @@
+title: "{{JOD_TITLE}}"
+baseurl: "{{JOD_CONFIG_BASEURL}}"
+url: "{{JOD_CONFIG_URL}}"
+theme: jekyll-theme-jod
+{{#JOD_RESTRICTION_URL}}
+jekyll_rdf:
+    restriction: "SELECT ?resourceUri WHERE { ?resourceUri ?p ?o . FILTER regex(str(?resourceUri), \"{{JOD_URL}}\") }"
+{{/JOD_RESTRICTION_URL}}
+{{#JOD_RESTRICTION}}
+jekyll_rdf:
+    restriction: "SELECT ?resourceUri WHERE { ?resourceUri ?p ?o . FILTER regex(str(?resourceUri), \"{{JOD_RESTRICTION}}\") }"
+{{/JOD_RESTRICTION}}
