@@ -10,9 +10,9 @@ Gem::Specification.new do |spec|
   spec.homepage      = "https://github.com/eccenca/jod"
   spec.license       = "MIT"
 
-  spec.files         = `git ls-files -z`.split("\x0").select { |f| f.match(%r{^(_layouts|_includes|_data/prefixes.pref|LICENSE|README)}i) }
+  spec.files         = Dir['_layouts/*'] + Dir['_includes/*'] + Dir['_data/*'] + Dir['_config.yml'] + Dir['LICENSE'] + Dir['README*']
 
-  spec.add_runtime_dependency "jekyll", "~> 4.2"
+  spec.add_runtime_dependency "jekyll", "~> 4.3"
   spec.add_runtime_dependency "jekyll-rdf", "~> 3.0"
   spec.add_runtime_dependency "liquid-md5", "~> 0.0.3"
 

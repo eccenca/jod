@@ -1,0 +1,11 @@
+baseurl: "/" # the subpath of your site, e.g. /blog
+url: "http://example.org" # the base hostname & protocol for your site, e.g. http://example.com
+
+theme: jekyll-theme-jod
+
+jekyll_rdf:
+    path: "ontology.ttl"
+    include_blank: false
+    default_template: "resource.html"
+    class_template_mappings:
+      "http://www.w3.org/2002/07/owl#Ontology": "ontology.html"
