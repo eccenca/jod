@@ -2,7 +2,7 @@
 
 The JOD project generates documentation web pages from Ontology turtle documents.
 
-JOD is based on [jekyll](jekyllrb.com) as well as the wonderful [jekyll-rdf plugin](https://github.com/white-gecko/jekyll-rdf) and creates web pages which use [Bootstrap 4](https://getbootstrap.com/) as a front-end component library.
+JOD is based on [jekyll](jekyllrb.com) as well as the wonderful [jekyll-rdf plugin](https://github.com/aksw/jekyll-rdf) and creates web pages which use [Bootstrap 4](https://getbootstrap.com/) as a front-end component library.
 
 ## Status
 
