@@ -1,5 +1,13 @@
 <div class="jumbotron">
-  <h1 class="display-3">{% include label.html iri = page.rdf.iri %}</h1>
+  {% assign site_title_config = site.title | strip %}
+  {% if site_title_config != "" %}
+  {% assign site_title = site.title %}
+  {% else %}
+  {% capture site_title -%}
+  {% include label.html iri = page.rdf.iri %}
+  {%- endcapture %}
+  {% endif %}
+  <h1 class="display-3">{{ site_title }}</h1>
   <p class="lead subtitle">{{ page.rdf | rdf_property: 'dbo:subtitle', 'en' }}</p>
   <p class="lead">{{ page.rdf | rdf_property: 'rdfs:comment', 'en' }}</p>
   <hr class="my-4">

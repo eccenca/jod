@@ -2,7 +2,7 @@
 
 The JOD project generates documentation web pages from Ontology turtle documents.
 
-JOD is based on [jekyll](jekyllrb.com) as well as the wonderful [jekyll-rdf plugin](https://github.com/white-gecko/jekyll-rdf) and creates web pages which use [Bootstrap 4](https://getbootstrap.com/) as a front-end component library.
+JOD is based on [jekyll](jekyllrb.com) as well as the wonderful [jekyll-rdf plugin](https://github.com/aksw/jekyll-rdf) and creates web pages which use [Bootstrap 4](https://getbootstrap.com/) as a front-end component library.
 
 ## Status
 
@@ -34,6 +34,23 @@ Or install it yourself as:
 ## Usage
 
 TODO: Write usage instructions here. Describe your available layouts, includes, and/or sass.
+
+## Docker
+
+There is also a docker container, that hides away all of the jekyll and jekyll-rdf specific configuration.
+It currently is available at the GitHub Container Registry as `ghcr.io/eccenca/jod:main`.
+
+As preparation your ontology should be available as `ontology.ttl` in the current directory.
+Specify the base URL for the Jod documentation as `JOD_URL` (mandatory).
+You can overwrite the ontologies title with `JOD_TITLE`.
+The switch `JOD_RESTRICTION_URL` configures jod to only build resources with the configured base URL (this brings some speed up).
+To use your own configuration you can overwrite the docker run command, e.g. `jekyll build --disable-disk-cache --config _config.yml`. Checkout the [Jekyll RDF documentation for details](https://github.com/AKSW/jekyll-rdf).
+
+```
+docker run --rm -v .:/data -e JOD_URL=http://example.org -e JOD_RESTRICTION_URL=True ghcr.io/eccenca/jod:main
+```
+
+Will produce a directory `_site` with the generated documentation.
 
 ## Contributing
 

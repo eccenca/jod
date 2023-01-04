@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |spec|
   spec.name          = "jekyll-theme-jod"
-  spec.version       = "0.2.5"
+  spec.version       = "0.2.6"
   spec.authors       = ["Sebastian Tramp", "Natanael Arndt"]
   spec.email         = ["sebastian.tramp@eccenca.com", "arndtn@gmail.com"]
 
@@ -10,12 +10,13 @@ Gem::Specification.new do |spec|
   spec.homepage      = "https://github.com/eccenca/jod"
   spec.license       = "MIT"
 
-  spec.files         = `git ls-files -z`.split("\x0").select { |f| f.match(%r{^(_layouts|_includes|_data/prefixes.pref|LICENSE|README)}i) }
+  spec.files         = Dir['_layouts/*'] + Dir['_includes/*'] + Dir['_data/*'] + Dir['_config.yml'] + Dir['LICENSE'] + Dir['README*']
 
-  spec.add_runtime_dependency "jekyll", "~> 4.2"
+  spec.add_runtime_dependency "jekyll", "~> 4.3"
   spec.add_runtime_dependency "jekyll-rdf", "~> 3.0"
   spec.add_runtime_dependency "liquid-md5", "~> 0.0.3"
+  spec.add_runtime_dependency "webrick", "~> 1.7"
 
-  spec.add_development_dependency "bundler", "~> 1.12"
+  spec.add_development_dependency "bundler", "~> 3.3"
   spec.add_development_dependency "rake", "~> 10.0"
 end

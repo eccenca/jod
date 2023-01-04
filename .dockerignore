@@ -1,0 +1,10 @@
+*
+!_data
+!_includes
+!_layouts
+!docker-resources
+!_config.yml
+!Gemfile
+!jekyll-theme-jod.gemspec
+!LICENSE
+!README.md
