@@ -7,10 +7,12 @@
 @prefix mv: <http://schema.mobivoc.org/> .
 @prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#>.
 @prefix skos: <http://www.w3.org/2004/02/skos/core#>.
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
 
 <http://schema.mobivoc.org/>
     dcterms:modified "2017-05-15"^^xsd:date ;
     vann:preferredNamespacePrefix "mv" ;
+    foaf:depiction <http://www.mobivoc.org/static/img/logo-www.mobivoc.org.png> ;
     vann:preferredNamespaceUri "http://schema.mobivoc.org/" ;
     a <http://purl.org/vocommons/voaf#Vocabulary>, owl:Ontology ;
     rdfs:comment "Our goal is to significantly improve the data mobility between all stakeholders by providing a standardized vocabulary using Semantic Web technologies and ontologies. For the open vocabulary covering various mobility aspects we use RDF (Resource Description Framework) - a recommended specification of the World Wide Web Consortium (W3C) and the so-called lingua franca for the integration of data and web. We invite everyone who is interested to join our MobiVoc initiative and to participate in the development of the Open Mobility Vocabulary."@en ;

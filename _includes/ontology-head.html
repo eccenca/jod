@@ -56,6 +56,10 @@
         <dt>Preferred Namespace URI</dt>
         <dd>{{- vannPreferredNamespaceUri -}}</dd>
         {%- endif -%}
+        {%- assign foafDepiction = page.rdf | rdf_property: 'foaf:depiction' -%}
+        {%- if foafDepiction -%}
+        <dd><img src="{{- foafDepiction -}}"/></dd>
+        {%- endif -%}
     </dl>
   </p>
   <hr class="my-4">
