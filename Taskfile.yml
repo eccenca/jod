@@ -34,7 +34,7 @@ tasks:
     cmds:
       - gem build {{.GEM_NAME}}.gemspec
 
-  gem:release:
+  gem:push:
     desc: Push the gem to rubygems.org
     cmds:
       - gem push {{.GEM_NAME}}-{{.VERSION}}.gem
