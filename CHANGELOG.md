@@ -18,6 +18,11 @@ TODO: add at least one Added, Changed, Deprecated, Removed, Fixed or Security se
 -
 
 
+## [0.3.2] 2023-07-03
+
+### Fixed
+- Rename task to gem:push
+
 ## [0.3.1] 2023-07-03
 
 ### Fixed
