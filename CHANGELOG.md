@@ -20,6 +20,9 @@ TODO: add at least one Added, Changed, Deprecated, Removed, Fixed or Security se
 
 ## [0.3.0] 2023-07-03
 
+### Add
+- Taskfile
+
 ### Fixed
 - Fix permissions for `write_config.sh` in docker image
 - Fix environment value in `write_config.sh` in docker image
@@ -27,6 +30,7 @@ TODO: add at least one Added, Changed, Deprecated, Removed, Fixed or Security se
 ### Changed
 - Depend on Jekyll RDF '~> 4.0'
 - Remove support for linux/ppc64le
+- Set gem version based on git tag
 
 
 ## [0.2.6] 2022-11-14
