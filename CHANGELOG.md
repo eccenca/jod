@@ -18,6 +18,11 @@ TODO: add at least one Added, Changed, Deprecated, Removed, Fixed or Security se
 -
 
 
+## [0.3.1] 2023-07-03
+
+### Fixed
+- Update rake dependency to 13
+
 ## [0.3.0] 2023-07-03
 
 ### Add
