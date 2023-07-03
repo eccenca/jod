@@ -1,8 +1,12 @@
 # coding: utf-8
+RELEASE_VERSION = case
+  when ENV['VERSION'] then ENV['VERSION']
+  else `git describe --tags --dirty --always`
+end
 
 Gem::Specification.new do |spec|
   spec.name          = "jekyll-theme-jod"
-  spec.version       = "0.3.0"
+  spec.version       = RELEASE_VERSION.to_s
   spec.authors       = ["Sebastian Tramp", "Natanael Arndt"]
   spec.email         = ["sebastian.tramp@eccenca.com", "arndtn@gmail.com"]
 
