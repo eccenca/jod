@@ -1,7 +1,14 @@
 # coding: utf-8
 RELEASE_VERSION = case
   when ENV['VERSION'] then ENV['VERSION']
-  else `git describe --tags --dirty --always`
+  else
+    version = `git describe --tags --dirty --always`
+    # if Gem::Version.new(ARGV[0]).prerelease? then puts Gem::Version.new(Gem::Version.new(ARGV[0].split('-')[0]).bump().to_s + '-' + ARGV[0].split('-')[1..].join('.')) else puts Gem::Version.new(ARGV[0]) end
+    if Gem::Version.new(version).prerelease? then
+      Gem::Version.new(Gem::Version.new(version.split('-')[0]).bump().to_s + '-' + version.split('-')[1..].join('.'))
+    else
+      Gem::Version.new(version)
+    end
 end
 
 Gem::Specification.new do |spec|
