@@ -1,0 +1,45 @@
+version: '3'
+
+env:
+  BUNDLE_PATH: .vendor
+
+vars:
+  VERSION:
+    sh: git describe --tags --dirty --always
+  GEM_NAME: jekyll-theme-jod
+  DOCKER_IMAGE: eccenca/jod
+
+tasks:
+
+  default:
+    desc: The list of all defined tasks
+    cmds:
+      - task -a
+
+  info:
+    desc: Output some variables
+    cmds:
+      - |
+        echo "VERSION: {{.VERSION}}"
+        echo "GEM_NAME: {{.GEM_NAME}}"
+        echo "DOCKER_IMAGE: {{.DOCKER_IMAGE}}"
+
+  install:
+    desc: Install jekyll rdf and its dependencies with bundle
+    cmds:
+      - bundle install
+
+  gem:build:
+    desc: Build the ruby gem
+    cmds:
+      - gem build {{.GEM_NAME}}.gemspec
+
+  gem:release:
+    desc: Push the gem to rubygems.org
+    cmds:
+      - gem push {{.GEM_NAME}}-{{.VERSION}}.gem
+
+  docker:build:
+    desc: Build the docker image
+    cmds:
+      - docker build --no-cache -t {{.DOCKER_IMAGE}}:{{.VERSION}} .
