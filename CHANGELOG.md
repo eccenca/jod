@@ -15,7 +15,7 @@ TODO: add at least one Added, Changed, Deprecated, Removed, Fixed or Security se
 -
 
 ### Changed
--
+- Specify registry for OCI base image in Dockerfile
 
 
 ## [0.3.2] 2023-07-03
