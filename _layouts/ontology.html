@@ -94,6 +94,45 @@ rdf_prefix_path: "_data/prefixes.pref"
     ' %}
 {% assign countDatatypePropertiesResultSet = page.rdf | sparql_query: countDatatypePropertiesQuery %}
 
+{% assign namedIndividualsQuery = '
+    SELECT DISTINCT ?subject
+    WHERE
+    {
+        ?subject a ?class .
+        FILTER ( ?class IN (owl:NamedIndividual) )
+        FILTER isIRI(?subject)
+    }
+    ORDER BY ?label' %}
+{% assign namedIndividualsResultset = page.rdf | sparql_query: namedIndividualsQuery %}
+
+{% assign countNamedIndividualsQuery = '
+    SELECT DISTINCT (COUNT(?subject) as ?namedIndividuals)
+    WHERE
+    {
+        ?subject a ?class .
+        FILTER ( ?class IN (owl:NamedIndividual) )
+        FILTER isIRI(?subject)
+    }
+    ' %}
+{% assign countNamedIndividualsResultSet = page.rdf | sparql_query: countNamedIndividualsQuery %}
+
+
+{% for result in countClassResultSet %}
+{% assign countClass = result.classes | plus: 0 %}
+{% endfor %}
+{% for result in countRdfPropertiesResultSet %}
+{% assign countRdfProperties = result.rdfProperties | plus: 0 %}
+{% endfor %}
+{% for result in countObjectPropertiesResultSet %}
+{% assign countObjectProperties = result.objectProperties | plus: 0 %}
+{% endfor %}
+{% for result in countDatatypePropertiesResultSet %}
+{% assign countDatatypeProperties = result.datatypeProperties | plus: 0 %}
+{% endfor %}
+{% for result in countNamedIndividualsResultSet %}
+{% assign countNamedIndividuals = result.namedIndividuals | plus: 0 %}
+{% endfor %}
+
 <div class="container-fluid">
   <div class="row">
       {% include navigation.html iri = result.subject.iri %}
@@ -101,24 +140,38 @@ rdf_prefix_path: "_data/prefixes.pref"
       <main role="main" class="container col-sm-9 col-md-10 col-lg-8 col-xl-7">
       {% include ontology-head.html iri = result.subject.iri %}
 
-      <h2 id="classes">Overview</h2>
-      <h2 id="classes">Classes</h2>
       {% for result in classesResultset %}
+        {%- if forloop.first %}
+        <h2 id="classes">Classes</h2>
+        {% endif -%}
           <p>{% include class-card.html iri = result.subject.iri %}</p>
       {% endfor %}
 
-      <h2 id="rdfProperties">RDF Properties</h2>
       {% for result in rdfPropertiesResultset %}
+        {%- if forloop.first %}
+        <h2 id="rdfProperties">RDF Properties</h2>
+        {% endif -%}
           <p>{% include class-card.html iri = result.subject.iri %}</p>
       {% endfor %}
 
-      <h2 id="objectProperties">Object Properties</h2>
       {% for result in objectPropertiesResultset %}
+        {%- if forloop.first %}
+        <h2 id="objectProperties">Object Properties</h2>
+        {% endif -%}
           <p>{% include class-card.html iri = result.subject.iri %}</p>
       {% endfor %}
 
-      <h2 id="datatypeProperties">Datatype Properties</h2>
       {% for result in datatypePropertiesResultset %}
+        {%- if forloop.first %}
+        <h2 id="datatypeProperties">Datatype Properties</h2>
+        {% endif -%}
+          <p>{% include class-card.html iri = result.subject.iri %}</p>
+      {% endfor %}
+
+      {% for result in namedIndividualsResultset %}
+        {%- if forloop.first %}
+        <h2 id="namedIndividuals">Named Individuals</h2>
+        {% endif -%}
           <p>{% include class-card.html iri = result.subject.iri %}</p>
       {% endfor %}
 

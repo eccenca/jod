@@ -1,0 +1,48 @@
+version: '3'
+
+env:
+  BUNDLE_PATH: .vendor
+
+vars:
+  GIT_DESCRIBE:
+    sh: git describe --tags --dirty --always
+  GEM_VERSION:
+    sh: ruby -e "if Gem::Version.new(ARGV[0]).prerelease? then puts Gem::Version.new(Gem::Version.new(ARGV[0].split('-')[0]).bump().to_s + '-' + ARGV[0].split('-')[1..].join('.')) else puts Gem::Version.new(ARGV[0]) end" {{.GIT_DESCRIBE}}
+  GEM_NAME: jekyll-theme-jod
+  DOCKER_IMAGE: eccenca/jod
+
+tasks:
+
+  default:
+    desc: The list of all defined tasks
+    cmds:
+      - task -a
+
+  info:
+    desc: Output some variables
+    cmds:
+      - |
+        echo "GIT_DESCRIBE: {{.GIT_DESCRIBE}}"
+        echo "GEM_VERSION: {{.GEM_VERSION}}"
+        echo "GEM_NAME: {{.GEM_NAME}}"
+        echo "DOCKER_IMAGE: {{.DOCKER_IMAGE}}"
+
+  install:
+    desc: Install jekyll rdf and its dependencies with bundle
+    cmds:
+      - bundle install
+
+  gem:build:
+    desc: Build the ruby gem
+    cmds:
+      - gem build {{.GEM_NAME}}.gemspec
+
+  gem:push:
+    desc: Push the gem to rubygems.org
+    cmds:
+      - gem push {{.GEM_NAME}}-{{.GEM_VERSION}}.gem
+
+  docker:build:
+    desc: Build the docker image
+    cmds:
+      - docker build --no-cache -t {{.DOCKER_IMAGE}}:{{.GEM_VERSION}} .

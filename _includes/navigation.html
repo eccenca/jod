@@ -20,22 +20,51 @@ style="position: -webkit-sticky;
 
     <ul class="nav nav-pills flex-column" id="search-list">
         {% for result in classesResultset %}
+            {%- if forloop.first %}
+            <li class="list-group-item list-group-item-dark disabled"><div class="fw-bold">Classes</div></li>
+            {% endif -%}
             <li class="nav-item">
-                <a class="nav-link" href="#id-{{ result.subject.iri | md5 }}">
+                <a search-string="class" class="nav-link" href="#id-{{ result.subject.iri | md5 }}">
+                    {% include label.html iri = result.subject.iri %}
+                </a>
+            </li>
+        {% endfor %}
+        {% for result in rdfPropertiesResultset %}
+            {%- if forloop.first %}
+            <li class="list-group-item list-group-item-dark disabled"><div class="fw-bold">RDF Properties</div></li>
+            {% endif -%}
+            <li class="nav-item">
+                <a search-string="rdf property" class="nav-link" href="#id-{{ result.subject.iri | md5 }}">
                     {% include label.html iri = result.subject.iri %}
                 </a>
             </li>
         {% endfor %}
         {% for result in objectPropertiesResultset %}
+            {%- if forloop.first %}
+            <li class="list-group-item list-group-item-dark disabled"><div class="fw-bold">Object Properties</div></li>
+            {% endif -%}
             <li class="nav-item">
-                <a class="nav-link" href="#id-{{ result.subject.iri | md5 }}">
+                <a search-string="object property" class="nav-link" href="#id-{{ result.subject.iri | md5 }}">
                     {% include label.html iri = result.subject.iri %}
                 </a>
             </li>
         {% endfor %}
         {% for result in datatypePropertiesResultset %}
+            {%- if forloop.first %}
+            <li class="list-group-item list-group-item-dark disabled"><div class="fw-bold">Datatype Properties</div></li>
+            {% endif -%}
             <li class="nav-item">
-                <a class="nav-link" href="#id-{{ result.subject.iri | md5 }}">
+                <a search-string="datatype proeprty" class="nav-link" href="#id-{{ result.subject.iri | md5 }}">
+                    {% include label.html iri = result.subject.iri %}
+                </a>
+            </li>
+        {% endfor %}
+        {% for result in namedIndividualsResultset %}
+            {%- if forloop.first %}
+            <li class="list-group-item list-group-item-dark disabled"><div class="fw-bold">Named Individuals</div></li>
+            {% endif -%}
+            <li class="nav-item">
+                <a search-string="named individual" class="nav-link" href="#id-{{ result.subject.iri | md5 }}">
                     {% include label.html iri = result.subject.iri %}
                 </a>
             </li>
@@ -53,11 +82,14 @@ style="position: -webkit-sticky;
       // Loop through all list items, and hide those who don't match the search query
       for (i = 0; i < li.length; i++) {
         a = li[i].getElementsByTagName("a")[0];
-        txtValue = a.textContent || a.innerText;
-        if (txtValue.toUpperCase().indexOf(filter) > -1) {
-          li[i].style.display = "";
-        } else {
-          li[i].style.display = "none";
+        if (a != undefined) {
+            txtValue = a.textContent || a.innerText;
+            txtValue = txtValue + a.getAttribute("search-string");
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            li[i].style.display = "";
+            } else {
+            li[i].style.display = "none";
+            }
         }
       }
     }

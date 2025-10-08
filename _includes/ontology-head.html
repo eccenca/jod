@@ -63,30 +63,26 @@
     </dl>
   </p>
   <hr class="my-4">
-  <p>
-  {% for result in countClassResultSet %}
-    <a class="btn btn-primary btn-lg" href="#classes" role="button">
+  <p style="line-height: 3.3rem;">
+    <a class="btn btn-primary btn-lg {% unless countClass > 0 %}disabled{% endunless %}" href="#classes" role="button">
         Classes
-        <span class="badge badge-light">{{ result.classes}}</span>
+        <span class="badge badge-light">{{ countClass }}</span>
     </a>
-  {% endfor %}
-  {% for result in countRdfPropertiesResultSet %}
-    <a class="btn btn-primary btn-lg" href="#rdfProperties" role="button">
+    <a class="btn btn-primary btn-lg {% unless countRdfProperties > 0 %}disabled{% endunless %}" href="#rdfProperties" role="button">
         RDF Properties
-        <span class="badge badge-light">{{ result.rdfProperties}}</span>
+        <span class="badge badge-light">{{ countRdfProperties }}</span>
     </a>
-  {% endfor %}
-  {% for result in countObjectPropertiesResultSet %}
-    <a class="btn btn-primary btn-lg" href="#objectProperties" role="button">
+    <a class="btn btn-primary btn-lg {% unless countObjectProperties > 0 %}disabled{% endunless %}" href="#objectProperties" role="button">
         Object Properties
-        <span class="badge badge-light">{{ result.objectProperties}}</span>
+        <span class="badge badge-light">{{ countObjectProperties}}</span>
     </a>
-  {% endfor %}
-  {%- for result in countDatatypePropertiesResultSet -%}
-    <a class="btn btn-primary btn-lg" href="#datatypeProperties" role="button">
+    <a class="btn btn-primary btn-lg {% unless countDatatypeProperties > 0 %}disabled{% endunless %}" href="#datatypeProperties" role="button">
         Datatype Properties
-        <span class="badge badge-light">{{ result.datatypeProperties }}</span>
+        <span class="badge badge-light">{{ countDatatypeProperties }}</span>
     </a>
-  {%- endfor -%}
+    <a class="btn btn-primary btn-lg {% unless countNamedIndividuals > 0 %}disabled{% endunless %}" href="#namedIndividuals" role="button">
+        Named Individuals
+        <span class="badge badge-light">{{ countNamedIndividuals }}</span>
+    </a>
   </p>
 </div>
