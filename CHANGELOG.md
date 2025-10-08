@@ -9,7 +9,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 TODO: add at least one Added, Changed, Deprecated, Removed, Fixed or Security section
 
 ### Add
--
+- Add examples of jod to the README
 
 ### Fixed
 - Install `git` in build stage so that gem build does not fail

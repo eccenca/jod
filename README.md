@@ -68,9 +68,13 @@ When your theme is released, only the files in `_layouts`, `_includes`, and `_sa
 
 The theme is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT). Take a look at the `LICENSE` file.
 
-## Screenshot
+## Examples and Screenshot
 
 ![Screenshot](./Screenshot.png "Screenshot")
+
+Examples of using jod
+- [diggr Video Game Vocabulary](https://diggr.github.io/diggr-video-game-vocabulary/) ([repo](https://github.com/diggr/diggr-video-game-vocabulary))
+- [GND Ontology](https://d-nb.info/standards/elementset/gnd)
 
 ## Related Projects
 
