@@ -12,7 +12,7 @@ TODO: add at least one Added, Changed, Deprecated, Removed, Fixed or Security se
 -
 
 ### Fixed
--
+- Install `git` in build stage so that gem build does not fail
 
 ### Changed
 - Specify registry for OCI base image in Dockerfile

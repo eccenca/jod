@@ -1,6 +1,6 @@
 FROM docker.io/library/ruby:3.1-slim AS builder
 
-RUN apt-get update && apt-get -y install build-essential && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get -y install build-essential git && rm -rf /var/lib/apt/lists/*
 WORKDIR jekyll-theme-jod
 
 ADD . .
