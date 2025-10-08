@@ -114,7 +114,6 @@ rdf_prefix_path: "_data/prefixes.pref"
       <main role="main" class="container col-sm-9 col-md-10 col-lg-8 col-xl-7">
       {% include ontology-head.html iri = result.subject.iri %}
 
-      <h2 id="classes">Overview</h2>
       {% for result in classesResultset %}
         {%- if forloop.first %}
         <h2 id="classes">Classes</h2>

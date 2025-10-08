@@ -19,6 +19,8 @@ TODO: add at least one Added, Changed, Deprecated, Removed, Fixed or Security se
 - Show section headings only if section is not empty
 - Disable buttons for empty sections
 
+### Remove
+- Remove empty "Overview" section
 
 ## [0.3.2] 2023-07-03
 
