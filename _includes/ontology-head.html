@@ -80,5 +80,9 @@
         Datatype Properties
         <span class="badge badge-light">{{ countDatatypeProperties }}</span>
     </a>
+    <a class="btn btn-primary btn-lg {% unless countNamedIndividuals > 0 %}disabled{% endunless %}" href="#namedIndividuals" role="button">
+        Named Individuals
+        <span class="badge badge-light">{{ countNamedIndividuals }}</span>
+    </a>
   </p>
 </div>

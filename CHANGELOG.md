@@ -10,6 +10,7 @@ TODO: add at least one Added, Changed, Deprecated, Removed, Fixed or Security se
 
 ### Add
 - Add examples of jod to the README
+- Display owl:NamedIndividuals
 
 ### Fixed
 - Install `git` in build stage so that gem build does not fail
