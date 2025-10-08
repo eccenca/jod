@@ -2,9 +2,20 @@
 
 All notable changes to this project will be documented in this file.
 
-The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres to [Semantic Versioning](http://semver.org/).
+The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres to [Semantic Versioning](http://semver.org/) resp. [zer0ver](https://0ver.org/).
 
 ## [Unreleased]
+
+### Add
+
+### Fixed
+
+### Changed
+
+### Remove
+
+
+## [0.4.0] 2025-10-08
 
 TODO: add at least one Added, Changed, Deprecated, Removed, Fixed or Security section
 
@@ -25,15 +36,18 @@ TODO: add at least one Added, Changed, Deprecated, Removed, Fixed or Security se
 ### Remove
 - Remove empty "Overview" section
 
+
 ## [0.3.2] 2023-07-03
 
 ### Fixed
 - Rename task to gem:push
 
+
 ## [0.3.1] 2023-07-03
 
 ### Fixed
 - Update rake dependency to 13
+
 
 ## [0.3.0] 2023-07-03
 
